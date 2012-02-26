@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+import copy, sys
+from pyPdf import PdfFileWriter, PdfFileReader
+from optparse import OptionParser
+
+input = PdfFileReader(sys.stdin)
+output = PdfFileWriter()
+
+parser = OptionParser()
+parser.add_option("-s", type="int", dest="start")
+parser.add_option("-e", type="int", dest="end")
+
+(options, args) = parser.parse_args()
+
+
+for p in [input.getPage(i) for i in range(options.start-1,options.end)]:
+    output.addPage(p)
+output.write(sys.stdout)
+
+
+
+
+# To run use: ./pdfsplit <infile >outfile -s 1 -e 3
