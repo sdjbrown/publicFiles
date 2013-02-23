@@ -1,0 +1,207 @@
+\documentclass[a4paper]{report}
+
+%-------------------------------------------------------------------------------
+
+%Set page margins
+
+\topmargin-20mm
+\headheight0mm
+\headsep0mm
+\textheight285mm
+\footskip0mm
+\textwidth170mm
+\oddsidemargin-11mm
+
+%-------------------------------------------------------------------------------
+
+%Load packages
+
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[english]{babel}
+
+%-------------------------------------------------------------------------------
+% Set fonts and column types
+
+\def\supertiny{\font\supertinyfont = cmss10 at 3.75pt \relax \supertinyfont} 
+\def\supertinyitalic{\font\supertinyfont = cmssi10 at 3.75pt \relax \supertinyfont} 
+\def\supertinybold{\font\supertinyfont = cmssbx10 at 4pt \relax \supertinyfont} 
+\newcommand{\smallbold}[1]{\supertinybold{#1}}
+\newcommand{\locnm}[1]{\supertinybold{#1}}
+\newcommand{\scinm}[1]{\supertinyitalic{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\newcommand{\smallprime}{\scalebox{0.4}{$^\prime$}}
+\newcommand{\smalldegree}{\scalebox{0.5}{\textdegree}}
+\newcommand{\detline}{\\ \smallbold{det. SDJ Brown \the\year}}
+
+
+%Define counters and boxes
+
+\newcounter{speclabel@}
+\newcounter{speclabel@@}
+\newsavebox{\TMPspeclabel}
+\newsavebox{\BoxA}
+\newsavebox{\BoxB}
+
+
+
+
+%Set lengths and other options
+
+\renewcommand{\arraystretch}{0.7}
+\renewcommand{\tabcolsep}{1pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0ex}
+\setlength{\columnsep}{1mm}
+\linespread{0.3}
+
+\pagestyle{empty}
+
+%-------------------------------------------------------------------------------
+%        New environments
+
+%speclabel creates an environment that repeats [n] times whatever is inside it.
+\newenvironment{speclabel}[1][1]{
+\setcounter{speclabel@@}{#1}
+\begin{lrbox}{\TMPspeclabel}
+        \begin{minipage}{\columnwidth}
+                \vspace{0.5ex}
+                \raggedright}
+                {
+        \end{minipage}
+\end{lrbox}
+        \setcounter{speclabel@}{0}
+        \loop\ifnum \value{speclabel@} < \value{speclabel@@}
+        \stepcounter{speclabel@}
+                \usebox{\TMPspeclabel}
+\endgraf\repeat}
+
+
+%lab_height fixes the height of each label to whatever size the strut in BoxB is.
+\newenvironment{lab_height}{\begin{tabular}{cc}}
+{& \makebox{\usebox{\BoxB}}
+\end{tabular}
+}
+
+%hablabel provides an environment for entering the label data.
+\newenvironment{hablabel}{\tabularx{14.4mm}{@{}Y@{}}}
+{\endtabularx}
+
+%-------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{multicols*}{10}
+
+\supertiny
+
+\sbox{\BoxB}{\begin{tabularx}{0.1mm}{Y}
+\rule[-8mm]{0pt}{8mm} 
+\end{tabularx}
+}
+%Change \rule from 0pt to view the strut. Can change the height from 8mm to modify the size of the label.
+
+
+\begin{speclabel}[40]
+\begin{lab_height}
+	\begin{hablabel}
+		NEW ZEALAND CO\\
+		Glenshee\\
+		Naseby\\
+		4 Nov 2012\\
+		SDJ Brown\\
+	\end{hablabel}
+\end{lab_height}
+
+\begin{lab_height}
+	\begin{hablabel}
+	Blower vac sample from road verge\\
+	45.03739\smalldegree S 170.2102\smalldegree E
+	SDJBcoll00105\\
+	\end{hablabel}
+\end{lab_height}
+\end{speclabel}
+
+
+\begin{speclabel}[33]
+\begin{lab_height}
+	\begin{hablabel}
+		NEW ZEALAND CO\\
+		Loganburn Reservoir\\
+		Lammermoor Range\\
+		19 Nov 2012\\
+		SDJ Brown\\
+	\end{hablabel}
+\end{lab_height}
+
+\begin{lab_height}
+	\begin{hablabel}
+	Blower vac sample from tussockland\\
+	45.48886\smalldegree S 169.9662\smalldegree E
+	\end{hablabel}
+\end{lab_height}
+\end{speclabel}
+
+
+\begin{speclabel}[2]
+\begin{lab_height}
+	\begin{hablabel}
+		NEW ZEALAND MK\\
+		Round Hill Skifield\\
+		Two Thumb Range\\
+		29 Jan 2013\\
+		SDJ Brown\\
+	\end{hablabel}
+\end{lab_height}
+
+\begin{lab_height}
+	\begin{hablabel}
+	Beaten from female {\scinm{Aciphylla}} flowers
+	\end{hablabel}
+\end{lab_height}
+\end{speclabel}
+
+
+\begin{speclabel}[3]
+\begin{lab_height}
+	\begin{hablabel}
+		VANUATU Efate\\
+		Rainbow Gardens\\
+		Port Vila\\
+		9 Feb 2009\\
+		SDJ Brown\\
+	\end{hablabel}
+\end{lab_height}
+
+\begin{lab_height}
+	\begin{hablabel}
+		From rotting {\scinm{Citrus}} fruit
+	\end{hablabel}
+\end{lab_height}
+\end{speclabel}
+
+
+\begin{speclabel}[5]
+\begin{lab_height}
+	\begin{hablabel}
+		FIJI Viti Levu\\
+		Colo-i-suva\\
+		9 Nov 2009\\
+		SDJ Brown\\
+	\end{hablabel}
+\end{lab_height}
+
+\begin{lab_height}
+	\begin{hablabel}
+	Beaten from {\scinm{Cordyline fruticosa}}
+	\end{hablabel}
+\end{lab_height}
+\end{speclabel}
+
+
+\end{multicols*}
+\end{document}
+	
