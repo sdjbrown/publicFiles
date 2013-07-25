@@ -1,0 +1,52 @@
+\documentclass{article}
+
+
+\def\defaultfont{\font\supertinyfont = cmss10 at 10pt \relax \supertinyfont} 
+
+\newcommand{\fontTest}[1]{
+	\batchmode
+     \font\X=#1
+     \errorstopmode
+     \ifx\X\nullfont
+       \defaultfont
+	Font #1 not able to be loaded
+	
+     \else
+	\def\tempfont{\font\supertinyfont = #1 at 10pt \relax \supertinyfont} 
+	\defaultfont
+	#1
+	
+	\tempfont
+	The quick brown fox jumps over the lazy dog
+	12344567890
+	HOLOTYPE PARATYPE
+	\\\\
+     \fi
+
+}
+
+\setlength{\parindent}{0pt}
+
+<<echo=FALSE, fig=FALSE>>=
+# Run the line below to get a list of all .tfm file names
+
+aa <- scan("/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map", what="character", sep = "\n", skip = 7)
+
+fonts <- sapply(strsplit(aa, split = " "), function(xx) xx[1])
+
+fontTest <- paste("\\fontTest{", fonts, "}", sep = "")	
+@
+
+
+\begin{document}
+
+
+
+<<echo=FALSE, fig=FALSE, results=tex>>=
+cat(fontTest, sep="\r")
+@
+
+\end{document}
+
+
+ 
