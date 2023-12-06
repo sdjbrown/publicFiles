@@ -11,7 +11,7 @@
 dynamitePlot <- function(height, error, names = NA, significance = NA, ylim = c(0,maxLim), ...){
 	maxLim <- 1.1* max(mapply(sum, height, error))
 	bp <- barplot(height, names.arg = names, ylim = ylim, ...)
-	arrows(x0 = bp, y0 = height, y1 = height + error, angle = 90)
+	arrows(x0 = bp, y0 = height, y1 = height + error, color = "red", angle = 90)
 	text(x = bp, y = 0.2 + height + error, labels = significance)
 }
 
