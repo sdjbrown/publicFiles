@@ -14,9 +14,6 @@ library(terra)
 library(jsonlite)
 library(colorspace)
 
-setwd("/home/sam/mappingTemp")
-
-
 ##################################################
 # Load external geographic datasets
 
